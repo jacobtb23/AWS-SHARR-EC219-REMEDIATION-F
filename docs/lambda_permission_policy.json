@@ -1,0 +1,27 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "ec2:DescribeSecurityGroupRules",
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:RevokeSecurityGroupIngress",
+                "logs:CreateLogStream",
+                "logs:CreateLogGroup",
+                "logs:PutLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:ec2:*:${account}:security-group/*",
+                "arn:aws:ec2:*:${account}:security-group-rule/*",
+                "arn:aws:logs:*:${account}:log-group:/aws/lambda/ASR-REMEDIATE-SGs-EC2-19:*",
+                "arn:aws:logs:*:${account}:*"
+            ]
+        }
+    ]
+}

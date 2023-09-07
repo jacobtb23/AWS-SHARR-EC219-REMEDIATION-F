@@ -1,0 +1,61 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "config:DescribeConfigRules",
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "ssm:PutParameter",
+                "ssm:GetParameters",
+                "ssm:GetParameter"
+            ],
+            "Resource": [
+                "arn:aws:ssm:*:${account}:parameter/Solutions/SO0111/*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:InvokeFunction"
+            ],
+            "Resource": [
+                "arn:aws:lambda:*:*:function:ASR-REMEDIATE-SGs-EC2-19",
+                "arn:aws:lambda:*:${account}:function:*"
+            ]
+        },
+        {
+            "Sid":"VisualEditor3",
+            "Action": "iam:PassRole",
+            "Resource": "arn:aws:iam::${account}:role/SO0111-Remediate-SC-2.0.0-EC2.19",
+            "Effect": "Allow"
+        },
+        {
+            "Sid": "VisualEditor4",
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetAutomationExecution",
+                "ssm:DescribeAutomationStepExecutions",
+                "ssm:StartAutomationExecution"
+            ],
+            "Resource": [
+                "arn:aws:ssm:*:${account}:document/Solutions/ASR-SC_2.0.0_EC2.19",
+                "arn:aws:ssm:*:${account}:automation-definition/*",
+                "arn:aws:ssm:*::automation-definition/*",
+                "arn:aws:ssm:*:${account}:automation-execution/*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor5",
+            "Action": "sts:AssumeRole",
+            "Resource": "arn:aws:iam::${account}:role/SO0111-Remediate-SC-2.0.0-EC2.19",
+            "Effect": "Allow"
+        }
+    ]
+}

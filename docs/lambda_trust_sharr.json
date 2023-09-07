@@ -1,0 +1,20 @@
+{
+    "Version": "2012-10-17",
+    "Id": "default",
+    "Statement": [
+      {
+        "Sid": "LambdaTrustSHARRExecutionRole",
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "arn:aws:iam::${account}:role/SO0111-Remediate-SC-2.0.0-EC2.19"
+        },
+        "Action": "lambda:InvokeFunction",
+        "Resource": "arn:aws:lambda:*:${account}:function:ASR-REMEDIATE-SGs-EC2-19",
+        "Condition": {
+          "StringEquals": {
+            "aws:PrincipalOrgID": "o-gbkuu6qpei"
+          }
+        }
+      }
+    ]
+  }
